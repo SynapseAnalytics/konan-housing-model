@@ -1,0 +1,40 @@
+[tool.poetry]
+name = "konan-housing-model"
+version = "0.1.0"
+description = "A Konan-ready ML model, packaged and distributed as a Docker image, to estimate the sale price of house based on the popular Ames Housing Dataset"
+authors = ["Synapse Analytics"]
+readme = "README.md"
+repository = "https://github.com/SynapseAnalytics/konan-housing-model"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+konan-sdk = "^1.2.6"
+
+[tool.poetry.dev-dependencies]
+flake8 = "^4.0.1"
+pytest = "^7.1.2"
+python-semantic-release = "^7.28.1"
+PyYAML = "^6.0"
+Sphinx = "^4.5.0"
+sphinx-rtd-theme = "^1.0.0"
+python-dotenv = "^0.20.0"
+
+[tool.semantic_release]
+branch = "main"
+version_variable = [
+    "pyproject.toml:version",
+]
+version_toml = [
+    "pyproject.toml:tool.poetry.version"
+]
+version_pattern = [
+    ".konan:KONAN_APP_VERSION=v{version}",
+]
+commit_author = "github-actions <actions@github.com>"
+upload_to_repository = true
+upload_to_release = true
+build_command = "pip install poetry && poetry build"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
