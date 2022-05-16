@@ -1,0 +1,163 @@
+ordinalEncoding:
+  # Street:
+  #   - Grvl
+  #   - Pave
+  # Alley:
+  #   - Grvl
+  #   - Pave
+  # LandContour:
+  #   - Lvl
+  #   - Bnk
+  #   - HLS
+  #   - Low
+  # Utilities:
+  #   - AllPub
+  #   - NoSewr
+  #   - NoSeWa
+  #   - ELO
+  # LandSlope:
+  #   - Gtl
+  #   - Mod
+  #   - Sev
+  # BldgType:
+  #   - 1Fam
+  #   - 2FmCon
+  #   - Duplx
+  #   - TwnhsE
+  #   - TwnhsI
+  # HouseStyle:
+  #   - 1Story
+  #   - 1.5Unf
+  #   - 2Story
+  #   - 2.5Fin
+  #   - 2.5Unf
+  #   - SFoyer
+  #   - SLvl
+  ExterQual:
+    - Ex
+    - Gd
+    - TA
+    - Fa
+    - Po
+  ExterCond:
+    - Ex
+    - Gd
+    - TA
+    - Fa
+    - Po
+  BsmtQual:
+    - Ex
+    - Gd
+    - TA
+    - Fa
+    - Po
+  BsmtCond:
+    - Ex
+    - Gd
+    - TA
+    - Fa
+    - Po
+  # BsmtExposure:
+  #   - Gd
+  #   - Av
+  #   - Mn
+  #   - 'No'
+  # BsmtFinType1:
+  #   - GLQ
+  #   - ALQ
+  #   - BLQ
+  #   - Rec
+  #   - LwQ
+  #   - Unf
+  # BsmtFinType2:
+  #   - GLQ
+  #   - ALQ
+  #   - BLQ
+  #   - Rec
+  #   - LwQ
+  #   - Unf
+  HeatingQC:
+    - Ex
+    - Gd
+    - TA
+    - Fa
+    - Po
+  CentralAir:
+    - 'Y'
+    - 'N'
+  # Electrical:
+  #   - SBrkr
+  #   - FuseA
+  #   - FuseF
+  #   - FuseP
+  #   - Mix
+  KitchenQual:
+    - Ex
+    - Gd
+    - TA
+    - Fa
+    - Po
+  Functional:
+    - Typ
+    - Min1
+    - Min2
+    - Mod
+    - Maj1
+    - Maj2
+    - Sev
+    - Sal
+  # FireplaceQu:
+  #   - Ex
+  #   - Gd
+  #   - TA
+  #   - Fa
+  #   - Po
+  # GarageFinish:
+  #   - Fin
+  #   - RFn
+  #   - Unf
+  # GarageQual:
+  #   - Ex
+  #   - Gd
+  #   - TA
+  #   - Fa
+  #   - Po
+  # GarageCond:
+  #   - Ex
+  #   - Gd
+  #   - TA
+  #   - Fa
+  #   - Po
+  PavedDrive:
+    - 'Y'
+    - 'P'
+    - 'N'
+  # PoolQC:
+  #   - Ex
+  #   - Gd
+  #   - TA
+  #   - Fa
+  #   - Po
+  Fence:
+    - GdPrv
+    - MnPrv
+    - GdWo
+    - MnWw
+oneHotEncoding:
+  # - MSZoning
+  # - LotShape
+  # - LotConfig
+  # - Neighborhood
+  # - Condition1
+  # - Condition2
+  # - RoofStyle
+  # - RoofMatl
+  # - Exterior1st
+  # - Exterior2nd
+  # - MasVnrType
+  - Foundation
+  - Heating
+  # - GarageType
+  - MiscFeature
+  # - SaleType
+  # - SaleCondition
