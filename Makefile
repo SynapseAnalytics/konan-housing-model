@@ -35,7 +35,7 @@ build-nc: ## Build the image without caching
 
 # Locally test the image
 run: ## Run a container of the image
-	docker run -i -t --rm --name="$(KONAN_APP_NAME)" $(KONAN_APP_NAME)
+	docker run -i -t --rm -p 8000:8000 --name="$(KONAN_APP_NAME)" $(KONAN_APP_NAME)
 
 up: build run ## Build the image and run a container of it (Alias to make build && make run)
 
