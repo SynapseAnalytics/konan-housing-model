@@ -66,7 +66,7 @@ def run_training(
     print(f"Model {regressor_name} training MAPE: {_mape_train}")
     print(f"Model {regressor_name} training MAE: {_mae_train}")
 
-    return _fit_model, _mape_train,_mae_train
+    return _fit_model, _mape_train, _mae_train
 
 
 def _cross_validate(
