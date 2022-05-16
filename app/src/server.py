@@ -51,8 +51,8 @@ class MyPredictionRequest(KonanServiceBasePredictionRequest):
     ExterCond: RatingTypes
 
     Foundation: FoundationTypes
-    BsmtQual: RatingTypes
-    BsmtCond: RatingTypes
+    BsmtQual: RatingTypes = None
+    BsmtCond: RatingTypes = None
 
     Heating: HeatingTypes
     HeatingQC: RatingTypes
@@ -117,7 +117,6 @@ class MyModel(KonanServiceBaseModel):
             encoder=self.ordinal_encoder,
         )
         df = df.fillna(0)
-        print(df)
 
         # Use your logic to make a prediction
         sale_price = float(np.expm1(self.model.predict(df)))
