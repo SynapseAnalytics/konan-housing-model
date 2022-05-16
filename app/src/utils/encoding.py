@@ -37,8 +37,6 @@ def one_hot_encode(
         axis=1,
     )
 
-    # print(_df_transformed['MSZoning'].head(10))
-
     return _df_transformed, _encoder
 
 

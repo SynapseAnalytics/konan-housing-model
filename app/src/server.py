@@ -12,6 +12,7 @@ from konan_sdk.konan_service.serializers import (
     KonanServiceBasePredictionRequest, KonanServiceBasePredictionResponse,
     KonanServiceBaseEvaluateRequest, KonanServiceBaseEvaluateResponse,
     KonanServiceEvaluation,
+    KonanServicePredefinedMetricName,
 )
 
 from housing_enums import (
@@ -28,10 +29,13 @@ from utils.encoding import (
     one_hot_encode,
     ordinal_encode,
 )
-from utils.metrics import mape
+from utils.metrics import (
+    mae,
+    mape,
+)
 
 
-ARTIFACTS_DIR = 'app/artifacts'
+ARTIFACTS_DIR = '/app/artifacts'
 
 
 class MyPredictionRequest(KonanServiceBasePredictionRequest):
@@ -125,21 +129,6 @@ class MyModel(KonanServiceBaseModel):
         # Optionally postprocess the prediction here
         return sample_prediction
 
-    # def _mean_absolute_percentage_error(self, req: KonanServiceBaseEvaluateRequest):
-    #     y_pred = np.array([x.prediction.SalePrice for x in req.data])
-    #     y_true = np.array([x.target.SalePrice for x in req.data])
-
-    #     nan_indices = np.isnan(y_pred)
-    #     pos_inf_indices = np.isposinf(y_pred)
-    #     neg_inf_indices = np.isneginf(y_pred)
-
-    #     drop_indices = nan_indices | pos_inf_indices | neg_inf_indices
-
-    #     return mean_absolute_percentage_error(
-    #         y_true=y_true[~drop_indices],
-    #         y_pred=y_pred[~drop_indices],
-    #     )
-
     def evaluate(self, req: KonanServiceBaseEvaluateRequest) -> KonanServiceBaseEvaluateResponse:
         """Evaluates the model based on passed predictions and their ground truths
 
@@ -157,8 +146,14 @@ class MyModel(KonanServiceBaseModel):
             results=[
                 KonanServiceEvaluation(
                     metric_name="mean_absolute_percentage_error",
-                    # metric_value=self._mean_absolute_percentage_error(req),
                     metric_value=mape(
+                        y_pred=np.array([x.prediction.SalePrice for x in req.data]),
+                        y_true=np.array([x.target.SalePrice for x in req.data]),
+                    )
+                ),
+                KonanServiceEvaluation(
+                    metric_name=KonanServicePredefinedMetricName.mae,
+                    metric_value=mae(
                         y_pred=np.array([x.prediction.SalePrice for x in req.data]),
                         y_true=np.array([x.target.SalePrice for x in req.data]),
                     )

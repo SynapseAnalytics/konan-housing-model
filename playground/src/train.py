@@ -56,7 +56,7 @@ X_train = X_train.fillna(0)
 # ------------------------------------------------------------------- #
 # Train and test the model
 
-fit_regressor, _ = run_training(
+fit_regressor, _, _ = run_training(
     regressor_name="xgboost",
     regressor=get_xgboost(),
     X_train=X_train,

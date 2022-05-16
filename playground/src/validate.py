@@ -68,10 +68,11 @@ X_val = X_val.fillna(0)
 
 # ------------------------------------------------------------------- #
 # Validate the model
-val_mape = run_testing(
+val_mape, val_mae = run_testing(
     regressor=regressor,
     X_test=X_val,
     y_test=y_val,
 )
 
 print(f"Model validation Mean Absolute Percentage Error: {val_mape}")
+print(f"Model validation Mean Absolute Error: {val_mae}")
