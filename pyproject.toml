@@ -24,6 +24,7 @@ python-dotenv = "^0.20.0"
 
 [tool.semantic_release]
 branch = "main"
+major_on_zero = false
 version_variable = [
     "pyproject.toml:version",
 ]
