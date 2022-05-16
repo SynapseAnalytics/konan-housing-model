@@ -28,7 +28,7 @@ USER ${user}
 
 # Copy relevant files and directories
 WORKDIR ${KONAN_SERVICE_BASE_DIR}
-COPY --chown=${user} app ${KONAN_SERVICE_BASE_DIR}
+COPY --chown=${user} app/ ${KONAN_SERVICE_BASE_DIR}
 
 # Make scripts executable
 RUN chmod +x ${KONAN_SERVICE_BASE_DIR}/retrain.sh || true
