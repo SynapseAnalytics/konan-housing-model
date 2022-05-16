@@ -3,10 +3,9 @@ from typing import Any
 
 import numpy as np
 import pandas as pd
-from sklearn.metrics import mean_absolute_percentage_error
 from sklearn.model_selection import KFold, cross_val_score
 
-from utils.metrics import mape
+from utils.metrics import mae, mape
 
 
 def run_testing(
@@ -18,16 +17,16 @@ def run_testing(
         model=regressor,
         X=X_test,
     )
-    # _mape_test = _evaluate(
-    #     y_true=y_test,
-    #     y_pred=_y_pred_test,
-    # )
     _mape_test = mape(
         y_true=y_test,
         y_pred=_y_pred_test,
     )
+    _mae_test = mae(
+        y_true=y_test,
+        y_pred=_y_pred_test,
+    )
 
-    return _mape_test
+    return _mape_test, _mae_test
 
 
 def run_training(
@@ -56,17 +55,18 @@ def run_training(
         X=X_train,
     )
 
-    # _mape_train = _evaluate(
-    #     y_true=y_train,
-    #     y_pred=_y_pred_train,
-    # )
     _mape_train = mape(
         y_true=y_train,
         y_pred=_y_pred_train,
     )
+    _mae_train = mae(
+        y_true=y_train,
+        y_pred=_y_pred_train,
+    )
     print(f"Model {regressor_name} training MAPE: {_mape_train}")
+    print(f"Model {regressor_name} training MAE: {_mae_train}")
 
-    return _fit_model, _mape_train
+    return _fit_model, _mape_train,_mae_train
 
 
 def _cross_validate(
@@ -105,24 +105,3 @@ def _predict(
     _raw_output = model.predict(X)
     _denormalized_output = np.expm1(_raw_output)
     return _denormalized_output
-
-
-def _evaluate(
-    y_true: np.ndarray,
-    y_pred: np.ndarray,
-) -> float:
-    nan_indices = np.isnan(y_pred)
-    pos_inf_indices = np.isposinf(y_pred)
-    neg_inf_indices = np.isneginf(y_pred)
-
-    drop_indices = nan_indices | pos_inf_indices | neg_inf_indices
-
-    # return mean_absolute_error(
-    #     y_true=y_true[~drop_indices],
-    #     y_pred=y_pred[~drop_indices],
-    # )
-
-    return mean_absolute_percentage_error(
-        y_true=y_true[~drop_indices],
-        y_pred=y_pred[~drop_indices],
-    )

@@ -5,6 +5,8 @@ import yaml
 from sklearn.model_selection import train_test_split
 import pandas as pd
 
+from konan_sdk.konan_service.serializers import KonanServicePredefinedMetricName
+
 from utils.encoding import one_hot_encode, ordinal_encode
 from utils.pipeline import run_testing, run_training
 from utils.regressors import get_xgboost
@@ -106,13 +108,13 @@ def retrain():
 
     # ------------------------------------------------------------------- #
     # Train and test the model
-    regressor, mape_train = run_training(
+    regressor, mape_train, mae_train = run_training(
         regressor_name="xgboost",
         regressor=get_xgboost(),
         X_train=X_train,
         y_train=y_train,
     )
-    mape_test = run_testing(
+    mape_test, mae_test = run_testing(
         regressor=regressor,
         X_test=X_test,
         y_test=y_test,
@@ -146,11 +148,19 @@ def retrain():
                     'metric_name': 'mean_absolute_percentage_error',
                     'metric_value': mape_train,
                 },
+                {
+                    'metric_name': KonanServicePredefinedMetricName.mae,
+                    'metric_value': mae_train,
+                },
             ],
             'test': [
                 {
-                    'metric_name': 'mean_absolute_percentage_error',
+                    'metric_name': 'mean_absolute_error',
                     'metric_value': mape_test,
+                },
+                {
+                    'metric_name': KonanServicePredefinedMetricName.mae,
+                    'metric_value': mae_test,
                 },
             ],
         },
