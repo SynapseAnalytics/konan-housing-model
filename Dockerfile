@@ -1,5 +1,5 @@
 # Specify base image
-FROM python:3.8-slim-stretch
+FROM python:3.8-slim-bullseye
 
 # Get some important arguments from user, with sane defaults
 ARG user=konan-user
