@@ -32,6 +32,7 @@ version_toml = [
 ]
 version_pattern = [
     ".konan:KONAN_APP_VERSION=v{version}",
+    ".konan.example:KONAN_APP_VERSION=v{version}",
 ]
 commit_author = "github-actions <actions@github.com>"
 upload_to_repository = true
