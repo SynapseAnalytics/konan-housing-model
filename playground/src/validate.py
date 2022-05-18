@@ -1,3 +1,4 @@
+import os
 import joblib
 import pandas as pd
 
@@ -7,6 +8,9 @@ from file_handling import (
 )
 from utils.encoding import one_hot_encode, ordinal_encode
 from utils.pipeline import run_testing
+
+
+REGRESSOR_NAME = os.getenv('KONAN_MODEL_REGRESSOR_NAME')
 
 
 # ------------------------------------------------------------------- #
@@ -19,13 +23,13 @@ metadata = read_metadata()
 # ------------------------------------------------------------------- #
 # Load model artifacts
 regressor = joblib.load(
-    'app/artifacts/model.pkl',
+    f'artifacts/{REGRESSOR_NAME}/model.pkl',
 )
 one_hot_encoder = joblib.load(
-    'app/artifacts/one_hot_encoder.pkl',
+    f'artifacts/{REGRESSOR_NAME}/one_hot_encoder.pkl',
 )
 ordinal_encoder = joblib.load(
-    'app/artifacts/ordinal_encoder.pkl',
+    f'artifacts/{REGRESSOR_NAME}/ordinal_encoder.pkl',
 )
 
 
@@ -61,7 +65,7 @@ X_val, _ = ordinal_encode(
     categories=list(metadata['ordinalEncoding'].values()),
     encoder=ordinal_encoder,
 )
-# print("Validation Features after OrindalEncoding set size:", X_val.shape)
+# print("Validation Features after OrdinalEncoding set size:", X_val.shape)
 
 X_val = X_val.fillna(0)
 

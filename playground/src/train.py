@@ -1,3 +1,4 @@
+import os
 import joblib
 import pandas as pd
 
@@ -7,7 +8,17 @@ from file_handling import (
 )
 from utils.encoding import one_hot_encode, ordinal_encode
 from utils.pipeline import run_training
-from utils.regressors import get_xgboost
+from utils.regressors import (
+    get_svr,
+    get_xgboost,
+)
+
+
+REGRESSORS_MAPPING = {
+    'svr': get_svr,
+    'xgboost': get_xgboost,
+}
+REGRESSOR_NAME = os.getenv('KONAN_MODEL_REGRESSOR_NAME')
 
 
 # ------------------------------------------------------------------- #
@@ -31,7 +42,7 @@ X_train = train.copy().drop(
 
 
 # ------------------------------------------------------------------- #
-# One-Hot-Encode Categorial Features
+# One-Hot-Encode Categorical Features
 X_train, one_hot_encoder = one_hot_encode(
     df=X_train,
     columns=metadata['oneHotEncoding'],
@@ -48,7 +59,7 @@ X_train, ordinal_encoder = ordinal_encode(
     categories=list(metadata['ordinalEncoding'].values()),
     encoder=None,
 )
-# print("Train Features after OrindalEncoding set size:", X_train.shape)
+# print("Train Features after OrdinalEncoding set size:", X_train.shape)
 
 X_train = X_train.fillna(0)
 
@@ -57,8 +68,8 @@ X_train = X_train.fillna(0)
 # Train and test the model
 
 fit_regressor, _, _ = run_training(
-    regressor_name="xgboost",
-    regressor=get_xgboost(),
+    regressor_name=REGRESSOR_NAME,
+    regressor=REGRESSORS_MAPPING.get(REGRESSOR_NAME, None)(),
     X_train=X_train,
     y_train=y_train,
 )
@@ -69,13 +80,13 @@ fit_regressor, _, _ = run_training(
 
 joblib.dump(
     fit_regressor,
-    'app/artifacts/model.pkl',
+    f'artifacts/{REGRESSOR_NAME}/model.pkl',
 )
 joblib.dump(
     one_hot_encoder,
-    'app/artifacts/one_hot_encoder.pkl',
+    f'artifacts/{REGRESSOR_NAME}/one_hot_encoder.pkl',
 )
 joblib.dump(
     ordinal_encoder,
-    'app/artifacts/ordinal_encoder.pkl',
+    f'artifacts/{REGRESSOR_NAME}/ordinal_encoder.pkl',
 )
