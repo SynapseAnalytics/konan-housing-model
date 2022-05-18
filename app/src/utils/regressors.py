@@ -1,3 +1,6 @@
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import RobustScaler
+from sklearn.svm import SVR
 from xgboost import XGBRegressor
 
 
@@ -15,4 +18,15 @@ def get_xgboost():
         scale_pos_weight=1,
         seed=27,
         reg_alpha=0.00006,
+    )
+
+
+def get_svr():
+    return make_pipeline(
+        RobustScaler(),
+        SVR(
+            C= 20,
+            epsilon= 0.008,
+            gamma=0.0003,
+        ),
     )

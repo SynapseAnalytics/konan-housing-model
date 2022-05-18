@@ -34,7 +34,7 @@ class FoundationTypes(str, Enum):
 class HeatingTypes(str, Enum):
     Floor = 'Floor'
     GasAir = 'GasA'
-    GasWater = 'GasWater'
+    GasWater = 'GasW'
     GravityFurnace = 'Grav'
     HotWater = 'OthW'
     WallFurnace = 'Wall'

@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "konan-housing-model"
-version = "0.1.0"
+version = "0.2.0"
 description = "A Konan-ready ML model, packaged and distributed as a Docker image, to estimate the sale price of house based on the popular Ames Housing Dataset"
 authors = ["Synapse Analytics"]
 readme = "README.md"
@@ -24,6 +24,7 @@ python-dotenv = "^0.20.0"
 
 [tool.semantic_release]
 branch = "main"
+major_on_zero = false
 version_variable = [
     "pyproject.toml:version",
 ]
