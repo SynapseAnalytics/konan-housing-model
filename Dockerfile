@@ -2,7 +2,7 @@
 FROM python:3.8-slim-bullseye
 
 # Get some important arguments from user, with sane defaults
-ARG user=konan-user
+# ARG user=konan-user
 ARG port=8000
 
 # Install dependencies
@@ -23,22 +23,25 @@ ENV KONAN_SERVICE_RETRAINING_DATA_DIR ${KONAN_SERVICE_RETRAINING_DIR}/data
 RUN mkdir -m 777 ${KONAN_SERVICE_BASE_DIR}
 
 # Create the custom user for the application to run as
-RUN adduser --disabled-password --gecos "" ${user}
-USER ${user}
+# RUN adduser --disabled-password --gecos "" ${user}
+# USER ${user}
 
 # Copy relevant files and directories
 WORKDIR ${KONAN_SERVICE_BASE_DIR}
-COPY --chown=${user} app/ ${KONAN_SERVICE_BASE_DIR}
+# COPY --chown=${user} app/ ${KONAN_SERVICE_BASE_DIR}
+COPY app/ ${KONAN_SERVICE_BASE_DIR}
 
 # Make scripts executable
 RUN chmod +x ${KONAN_SERVICE_BASE_DIR}/retrain.sh || true
 
 # Modify the PATH variable to allow for user-level pip installs
-ENV PATH="/home/${user}/.local/bin:${PATH}"
+# ENV PATH="/home/${user}/.local/bin:${PATH}"
 
 # Install requirements
-RUN pip install --user --upgrade pip && pip install --user --upgrade setuptools uvicorn
-RUN pip install --user --no-cache-dir -r ${KONAN_SERVICE_BASE_DIR}/requirements.txt
+# RUN pip install --user --upgrade pip && pip install --user --upgrade setuptools uvicorn
+# RUN pip install --user --no-cache-dir -r ${KONAN_SERVICE_BASE_DIR}/requirements.txt
+RUN pip install --upgrade pip && pip install --upgrade setuptools uvicorn
+RUN pip install --no-cache-dir -r ${KONAN_SERVICE_BASE_DIR}/requirements.txt
 
 # Expose port
 ENV KONAN_PORT=${port}
