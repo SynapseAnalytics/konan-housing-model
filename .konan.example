@@ -21,4 +21,4 @@ KONAN_CONTAINER_REGISTRY=docker.io
 
 # Naming and versioning your application
 KONAN_APP_NAME=konan-housing-model
-KONAN_APP_VERSION=v0.2.0
+KONAN_APP_VERSION=v0.3.1
