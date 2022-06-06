@@ -39,16 +39,17 @@ jobs:
     #     KONAN_MODEL_REGRESSOR_NAME=svr
     #     KONAN_MODEL_ARTIFACTS_PATH=builds/svr/app/artifacts
     #     python -m poetry run python src/playground/train.py
-    # - 
-    #   name: Login to DockerHub
-    #   uses: docker/login-action@v2
-    #   with:
-    #       username: ${{ secrets.DOCKERHUB_USERNAME }}
-    #       password: ${{ secrets.DOCKERHUB_TOKEN }}
-    # -
-    #   name: Build and push
-    #   uses: docker/build-push-action@v3
-    #   with:
-    #     context: builds/svr
-    #     push: true
-    #     tags: konan-housing-model:${{ github.ref_name }}
+    - 
+      name: Login to DockerHub
+      uses: docker/login-action@v2
+      with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+    -
+      name: Build and push
+      uses: docker/build-push-action@v3
+      with:
+        context: builds/svr
+        push: true
+        # tags: konan-housing-model:${{ github.ref_name }}
+        tags: konan-housing-model:test-svr
