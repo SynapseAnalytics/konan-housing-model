@@ -11,6 +11,10 @@ from utils.pipeline import run_testing
 
 
 REGRESSOR_NAME = os.getenv('KONAN_MODEL_REGRESSOR_NAME')
+ARTIFACTS_PATH = os.getenv(
+    'KONAN_MODEL_ARTIFACTS_PATH',
+    f'artifacts/{REGRESSOR_NAME}',
+)
 
 
 # ------------------------------------------------------------------- #
@@ -23,13 +27,13 @@ metadata = read_metadata()
 # ------------------------------------------------------------------- #
 # Load model artifacts
 regressor = joblib.load(
-    f'artifacts/{REGRESSOR_NAME}/model.pkl',
+    f'{ARTIFACTS_PATH}/model.pkl',
 )
 one_hot_encoder = joblib.load(
-    f'artifacts/{REGRESSOR_NAME}/one_hot_encoder.pkl',
+    f'{ARTIFACTS_PATH}/one_hot_encoder.pkl',
 )
 ordinal_encoder = joblib.load(
-    f'artifacts/{REGRESSOR_NAME}/ordinal_encoder.pkl',
+    f'{ARTIFACTS_PATH}/ordinal_encoder.pkl',
 )
 
 
