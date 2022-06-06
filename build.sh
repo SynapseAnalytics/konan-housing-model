@@ -34,4 +34,5 @@ cp -r src/playground/utils/* "$KONAN_BUILD_PATH/app/src/utils"
 
 # Copy over app/artifacts files
 mkdir -p "$KONAN_BUILD_PATH/app/artifacts"
+cp data/metadata.yml "$KONAN_BUILD_PATH/app/artifacts/metadata.yml"
 export KONAN_MODEL_REGRESSOR_NAME="$1" && export KONAN_MODEL_ARTIFACTS_PATH="$KONAN_BUILD_PATH/app/artifacts" && python -m poetry run python src/playground/train.py src/playground/train.py
