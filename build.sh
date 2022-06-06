@@ -20,7 +20,8 @@ KONAN_BUILD_PATH="builds/$1"
 
 # Copy over build files
 mkdir -p "$KONAN_BUILD_PATH"
-cp {Dockerfile,.dockerignore,Makefile,.konan} "$KONAN_BUILD_PATH/"
+cp {Dockerfile,.dockerignore,Makefile} "$KONAN_BUILD_PATH/"
+cp .konan.example "$KONAN_BUILD_PATH/.konan"
 
 # Add tag to KONAN_APP_VERSION
 sed -i "s/KONAN_APP_VERSION.*/&-$1/g" "$KONAN_BUILD_PATH/.konan"
@@ -38,3 +39,7 @@ cp -r src/playground/utils/* "$KONAN_BUILD_PATH/app/src/utils"
 # Copy over app/artifacts files
 mkdir -p "$KONAN_BUILD_PATH/app/artifacts"
 KONAN_MODEL_REGRESSOR_NAME="$1" KONAN_MODEL_ARTIFACTS_PATH="$KONAN_BUILD_PATH/app/artifacts" python src/playground/train.py
+
+pushd "$KONAN_BUILD_PATH"
+make release
+popd
