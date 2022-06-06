@@ -71,5 +71,5 @@ def read_metadata(
     directory: str = 'data',
 ) -> Dict[str, Any]:
 
-    with open(f'{directory}/metadata.yaml') as file:
+    with open(f'{directory}/metadata.yml') as file:
         return yaml.safe_load(file)

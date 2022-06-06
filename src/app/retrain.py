@@ -55,7 +55,7 @@ def retrain():
         test_size=0.15,
         random_state=68,
     )
-    with open(f'{ARTIFACTS_DIR_PATH}/metadata.yaml') as file:
+    with open(f'{ARTIFACTS_DIR_PATH}/metadata.yml') as file:
         metadata = yaml.safe_load(file)
 
     # ------------------------------------------------------------------- #

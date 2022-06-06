@@ -19,6 +19,10 @@ REGRESSORS_MAPPING = {
     'xgboost': get_xgboost,
 }
 REGRESSOR_NAME = os.getenv('KONAN_MODEL_REGRESSOR_NAME')
+ARTIFACTS_PATH = os.getenv(
+    'KONAN_MODEL_ARTIFACTS_PATH',
+    f'artifacts/{REGRESSOR_NAME}',
+)
 
 
 # ------------------------------------------------------------------- #
@@ -80,13 +84,13 @@ fit_regressor, _, _ = run_training(
 
 joblib.dump(
     fit_regressor,
-    f'artifacts/{REGRESSOR_NAME}/model.pkl',
+    f'{ARTIFACTS_PATH}/model.pkl',
 )
 joblib.dump(
     one_hot_encoder,
-    f'artifacts/{REGRESSOR_NAME}/one_hot_encoder.pkl',
+    f'{ARTIFACTS_PATH}/one_hot_encoder.pkl',
 )
 joblib.dump(
     ordinal_encoder,
-    f'artifacts/{REGRESSOR_NAME}/ordinal_encoder.pkl',
+    f'{ARTIFACTS_PATH}/ordinal_encoder.pkl',
 )

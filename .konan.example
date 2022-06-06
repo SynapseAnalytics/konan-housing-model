@@ -8,8 +8,8 @@
 KONAN_CONTAINER_REGISTRY=docker.io
 
 # Your credentials for the above container registry
-# KONAN_CONTAINER_REGISTRY_USERNAME={registry-username}  # secret, expose in shell enviornment directly
-# KONAN_CONTAINER_REGISTRY_PASSWORD={registry-password}  # secret, expose in shell enviornment directly
+# KONAN_CONTAINER_REGISTRY_USERNAME={registry-username}  # secret, expose in shell environment directly
+# KONAN_CONTAINER_REGISTRY_PASSWORD={registry-password}  # secret, expose in shell environment directly
 
 # Container registry namespace to push images to
 # Required for the KONAN_CONTAINER_REGISTRY konan.azurecr.io. You can find it in the Konan portal, under KCR here: https://app.konan.ai/KCR.
@@ -21,4 +21,4 @@ KONAN_CONTAINER_REGISTRY=docker.io
 
 # Naming and versioning your application
 KONAN_APP_NAME=konan-housing-model
-KONAN_APP_VERSION=v0.3.1
+KONAN_APP_VERSION=v0.3.2
