@@ -93,7 +93,7 @@ class MyModel(KonanServiceBaseModel):
         self.one_hot_encoder = joblib.load(f'{ARTIFACTS_DIR}/one_hot_encoder.pkl')
         self.ordinal_encoder = joblib.load(f'{ARTIFACTS_DIR}/ordinal_encoder.pkl')
 
-        self.metadata = yaml.safe_load(open(f'{ARTIFACTS_DIR}/metadata.yaml'))
+        self.metadata = yaml.safe_load(open(f'{ARTIFACTS_DIR}/metadata.yml'))
 
     def predict(self, req: MyPredictionRequest) -> MyPredictionResponse:
         """Makes an intelligent prediction
