@@ -25,8 +25,8 @@ def get_svr():
     return make_pipeline(
         RobustScaler(),
         SVR(
-            C= 20,
-            epsilon= 0.008,
+            C=20,
+            epsilon=0.008,
             gamma=0.0003,
         ),
     )
