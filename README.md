@@ -2,7 +2,7 @@
 
 [Konan](https://konan.ai) is your one-stop platform to bring your AI models to life. Typically, one would be required to do some tedious boring work in order to prepare the machine learning or data science model for deployment. Not with us! With **Konan**, gone are the days of worrying about a model's *dependencies*, battling with *containerization* or obsessively hand-holding the *infrastructure*. This repo will guide you in preparing your machine learning model in as seamless a manner as possible! Of course, don't forget to also checkout **Konan's** rich [documentation](https://docs.konan.ai) for additional info.
 
-This repository contains the source code and tooling necessarily to generate the **Konan**-compatible `konan-housing-model` docker image. Konan-ready ML model, packaged and distributed as a Docker image, to estimate the sale price of house based on the popular [Ames Housing Dataset](https://www.kaggle.com/datasets/prevek18/ames-housing-dataset) and the Jupyter [notebook](https://www.kaggle.com/code/jesucristo/1-house-prices-solution-top-1/notebook) titled *#1 House Prices Solution [top 1%]*, generously provided to the public by [Nanashi](https://www.kaggle.com/jesucristo).
+This repository contains the source code and tooling necessarily to generate the `konan-housing-model` docker image, a **Konan**-ready ML model packaged and distributed as a Docker image. The model aims to estimate the sale price of house based on the popular [Ames Housing Dataset](https://www.kaggle.com/datasets/prevek18/ames-housing-dataset) and the Jupyter [notebook](https://www.kaggle.com/code/jesucristo/1-house-prices-solution-top-1/notebook) titled *#1 House Prices Solution [top 1%]*, generously provided to the public by [Nanashi](https://www.kaggle.com/jesucristo).
 
 You can also find the built image and its tags on [Dockerhub](https://hub.docker.com/r/konanai/konan-housing-model) directly.
 
@@ -30,13 +30,45 @@ You can also find the built image and its tags on [Dockerhub](https://hub.docker
 
 To ensure that your local environment contains all of the required dependencies, run `poetry install` to install the dependencies in a virtual environment. You can learn more about **poetry** [here](https://python-poetry.org).
 
+### Deploying on Konan
+
+1. Go to the [Dockerhub page](https://hub.docker.com/r/konanai/konan-housing-model/tags) for this image and select the tag you want to deploy, and make note of the *image url*. The *image url* of your chosen tag is the part after the corresponding `docker pull`.
+    - For example, if you are using the `latest` tag, then the *image url* will be:
+
+        ```bash
+        konanai/konan-housing-model:latest
+        ```
+
+    - Don't forget to updated the `latest` tag. It is always recommended to use a specific, versioned tag and **not** `latest`.
+2. Go to [Konan](https://app.konan.ai), login and deploy this image as a new Deployment! Perhaps you'd find the relevant instructions on [Konan docs](https://docs.konan.ai/guide-to-konan-deployments/deploying-on-konan) useful.
+    - Use the `image url` that you took note of in the previous step.
+    - Leave the Container Registry Credentials blank, as you are using a publicly-available image.
+
+### Using a deployed Konan Deployment
+
+After following **Konan**'s [documentation](https://docs.konan.ai/guide-to-konan-deployments/deploying-on-konan) on deploying the `konan-housing-model` on `Konan`, you may wish to use the provided `housing-model/src/serving/main.py` script to interact with your newly-created deployment.
+
+1. Log in to [Konan](https://app.konan.ai) and retrieve the `UUID` of the **Deployment** you created using the `konan-housing-model`.
+2. Create a `.env` file in the `housing-model/src/serving` directory using the provided `.env.example` example file there.
+3. Export the needed environment variables
+
+    ```bash
+    . ./housing-model/src/serving/.env
+    ```
+
+4. Trigger some predictions and provide their feedback using the `housing-model/src/serving/main.py` script file
+
+    ```bash
+    python housing-model/src/serving/main.py
+    ```
+
 ### Generating the cleaned datasets
 
 ```bash
 python housing-model/src/playground/prepare.py
 ```
 
-### Train a new ML-model
+### Training a new ML-model
 
 1. Export some needed environment variables
   
@@ -56,7 +88,7 @@ python housing-model/src/playground/prepare.py
     python housing-model/src/playground/train.py
     ```
 
-### Validate the trained model
+### Validating a trained model
 
 1. Ensure you have trained the model, as described in the above steps
 2. Export the same needed environment variables, with the same values
@@ -75,7 +107,7 @@ python housing-model/src/playground/prepare.py
 
 Although you may use the official **Konan** docker image for your use, you may of course use the provided source to build (and optionally) publish your own version of the docker image.
 
-1. Create a `.konan` environment variable from the provided `.konan.example` example, and don't forget to update it with your credentials and desired image name and tag.
+1. Create a `.konan` environment variable from the provided `.konan.example` example, and don't forget to update it with your container registry credentials and desired image name and tag.
 2. Use the `Makefile` to build the image
 
     ```bash
@@ -95,24 +127,6 @@ Although you may use the official **Konan** docker image for your use, you may o
     ```
 
 Of course, feel free to run `make --help` to familiarize yourself with the other options the `Makefile` provides.
-
-### Using a deployed Konan Deployment
-
-After following **Konan**'s [documentation](https://docs.konan.ai/guide-to-konan-deployments/deploying-on-konan) on deploying the `konan-housing-model` on `Konan`, you may wish to use the provided `housing-model/src/serving/main.py` script to interact with your newly-created deployment.
-
-1. Log in to [Konan](https://app.konan.ai) and retrieve the `UUID` of the **Deployment** you created using the `konan-housing-model`.
-2. Create a `.env` file in the `housing-model/src/serving` directory using the provided `.env.example` example file there.
-3. Export the needed environment variables
-
-    ```bash
-    . ./housing-model/src/serving/.env
-    ```
-
-4. Trigger some predictions and provide their feedback using the `housing-model/src/serving/main.py` script file
-
-    ```bash
-    python housing-model/src/serving/main.py
-    ```
 
 ## Contributing
 
