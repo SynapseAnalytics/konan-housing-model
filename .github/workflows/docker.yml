@@ -37,7 +37,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
     - 
       name: Prepare svr build
-      run: source build.sh svr
+      run: . ./build.sh svr
     -
       name: Push svr tag
       uses: docker/build-push-action@v3
@@ -47,7 +47,7 @@ jobs:
         tags: docker.io/${{ secrets.DOCKERHUB_USERNAME }}/konan-housing-model:${{ github.ref_name }}-svr
     - 
       name: Prepare xgboost build
-      run: source build.sh xgboost
+      run: . ./build.sh xgboost
     -
       name: Push xgboost tag
       uses: docker/build-push-action@v3

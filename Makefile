@@ -25,13 +25,18 @@ endif
 # Clean the enviroment
 clean: ## Remove all images named `{KONAN_APP_NAME}`
 	docker rmi $$(docker images | grep $(KONAN_APP_NAME))
+	rm -r builds
 
 # Build the image
 build: ## Build the image
-	docker build -t $(KONAN_APP_NAME) .
+	. ./build.sh $(KONAN_APP_MODEL)
+	docker build -t $(KONAN_APP_NAME) --no-cache "builds/$(KONAN_APP_MODEL)"
+	rm -r "builds/$(KONAN_APP_MODEL)"
 
 build-nc: ## Build the image without caching
-	docker build -t $(KONAN_APP_NAME) --no-cache .
+	. ./build.sh $(KONAN_APP_MODEL)
+	docker build -t $(KONAN_APP_NAME) --no-cache "builds/$(KONAN_APP_MODEL)"
+	rm -r "builds/$(KONAN_APP_MODEL)"
 
 # Locally test the image
 run: ## Run a container of the image
@@ -51,7 +56,7 @@ tag-latest: ## Generate image `latest` tag
 
 tag-version: ## Generate image `{KONAN_APP_VERSION}` tag
 	@echo 'creating tag $(KONAN_APP_VERSION)'
-	docker tag $(KONAN_APP_NAME) $(KONAN_CONTAINER_REGISTRY)/$(KONAN_CONTAINER_REGISTRY_NAMESPACE)/$(KONAN_APP_NAME):$(KONAN_APP_VERSION)
+	docker tag $(KONAN_APP_NAME) $(KONAN_CONTAINER_REGISTRY)/$(KONAN_CONTAINER_REGISTRY_NAMESPACE)/$(KONAN_APP_NAME):$(KONAN_APP_VERSION)-$(KONAN_APP_MODEL)
 
 tag-for-kcr: ## Generate image for kcr
 	@echo 'creating tag for kcr'
