@@ -29,12 +29,12 @@ clean: ## Remove all images named `{KONAN_APP_NAME}`
 
 # Build the image
 build: ## Build the image
-	. ./build.sh $(KONAN_APP_MODEL)
+	./build.sh $(KONAN_APP_MODEL)
 	docker build -t $(KONAN_APP_NAME) --no-cache "builds/$(KONAN_APP_MODEL)"
 	rm -r "builds/$(KONAN_APP_MODEL)"
 
 build-nc: ## Build the image without caching
-	. ./build.sh $(KONAN_APP_MODEL)
+	./build.sh $(KONAN_APP_MODEL)
 	docker build -t $(KONAN_APP_NAME) --no-cache "builds/$(KONAN_APP_MODEL)"
 	rm -r "builds/$(KONAN_APP_MODEL)"
 
