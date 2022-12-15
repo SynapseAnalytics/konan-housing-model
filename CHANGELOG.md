@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v0.4.2 (2022-12-15)
+### Fix
+* **actions:** Bump relekang/python-semantic-release to 7.32.2 ([`7c70e1f`](https://github.com/SynapseAnalytics/konan-housing-model/commit/7c70e1f17421e3e1ea2ff351921e91b91cea752b))
+
 ## v0.4.1 (2022-12-15)
 ### Fix
 * **retraining:** Throw error on failure ([`6cd2c05`](https://github.com/SynapseAnalytics/konan-housing-model/commit/6cd2c059e31887ec64c6c1e47ee0f864e8c7cf14))
