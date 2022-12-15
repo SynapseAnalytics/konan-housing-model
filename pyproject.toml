@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "konan-housing-model"
-version = "0.4.0"
+version = "0.4.1"
 description = "A Konan-ready ML model, packaged and distributed as a Docker image, to estimate the sale price of house based on the popular Ames Housing Dataset"
 authors = ["Synapse Analytics"]
 readme = "README.md"

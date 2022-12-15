@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v0.4.1 (2022-12-15)
+### Fix
+* **retraining:** Throw error on failure ([`6cd2c05`](https://github.com/SynapseAnalytics/konan-housing-model/commit/6cd2c059e31887ec64c6c1e47ee0f864e8c7cf14))
+
 ## v0.4.0 (2022-06-07)
 ### Feature
 * **evaluation:** Add MAE evaluation metric ([`79a384c`](https://github.com/SynapseAnalytics/konan-housing-model/commit/79a384ce11b924944bdbd6f1f94b2c01a6191f71))
