@@ -1,5 +1,6 @@
 import joblib
 import json
+import sys
 import yaml
 
 from sklearn.model_selection import train_test_split
@@ -35,8 +36,7 @@ def retrain():
         pass
 
     if training_data is None and serving_data is None:
-        print('Unable to read both training and serving data')
-        return
+        sys.exit('Unable to read both training and serving data')
 
     data = []
     if training_data is not None:
