@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v0.4.3 (2022-12-15)
+### Fix
+* **actions:** Disable creation of venv ([`effa890`](https://github.com/SynapseAnalytics/konan-housing-model/commit/effa890cc4049d1225003f280af08cc0c1aa6f79))
+
 ## v0.4.2 (2022-12-15)
 ### Fix
 * **actions:** Bump relekang/python-semantic-release to 7.32.2 ([`7c70e1f`](https://github.com/SynapseAnalytics/konan-housing-model/commit/7c70e1f17421e3e1ea2ff351921e91b91cea752b))
